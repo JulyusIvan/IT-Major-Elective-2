@@ -1,0 +1,30 @@
+{% extends 'Base/base.html' %}
+{% block title %} Homepage {% endblock %}
+{% block content %} 
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Hobby</th>
+            <th>Posts</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for hobby in hobbies %}
+        <tr>
+            <td>{{ hobby.name }}</td>
+            <td>{{ hobby.hobby }}</td>
+            <td>{{ hobby.posts|length }}</td>
+            <td>
+                <a class="btn btn-primary" href="{{ url_for('read', id=hobby.id) }}">View</a>
+                <a class="btn btn-success" href="{{ url_for('create_post', hobby_id=hobby.id) }}">Add Post</a>
+                <a class="btn btn-warning" href="{{ url_for('update', id=hobby.id) }}">Edit</a>
+                <a class="btn btn-danger" href="{{ url_for('delete', id=hobby.id) }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a class="btn btn-success" href="{{ url_for('create') }}">ADD HOBBY</a>
+{% endblock %}
